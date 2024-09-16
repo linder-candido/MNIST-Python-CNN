@@ -22,7 +22,7 @@ class MnistDataloader(object):
                 raise ValueError('Magic number mismatch, expected 2049, got {}'.format(magic))
             labels = np.array(array("B", file.read()))
         
-        # Read the images to a numpy array of dimensions (784, 60000), on image per column
+        # Read one image (28x28) per collumn (784, 60000)
         with open(images_filepath, 'rb') as file:
             magic, size, rows, cols = struct.unpack(">IIII", file.read(16))
             if magic != self.magic2:

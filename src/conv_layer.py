@@ -1,7 +1,7 @@
 import numpy as np
 from scipy import signal
 from layer import Layer
-import sys
+
 #
 # Neural Network Layer for Matrix Multiplication 
 #
@@ -51,7 +51,7 @@ class ConvLayer(Layer):
         return self.z
     
     # Backward pass
-    def backward(self, djdz: np.ndarray, eta: float) -> np.ndarray:
+    def backward(self, djdz: np.ndarray, y=None, eta: float=None) -> np.ndarray:
         djdw = np.zeros(self.weights.shape)
         djda = np.zeros(self.a.shape)
         db = np.zeros(self.biases.shape)

@@ -7,5 +7,6 @@ class Layer(ABC):
         pass
 
     def backward(self, *args, **kwargs):
-        # TODO: update parameters (if necessary) and return the gradient w.r.t outputs of previous layer
+        # TODO: return the gradient w.r.t outputs of previous layer and,
+        #       if necessary, update weigths 
         pass

@@ -1,44 +1,22 @@
 import numpy as np
+from layer import Layer
 #
-# Neural Network Layer for Matrix Multiplication 
+# Sigmoid activation implemented as a layer 
 #
-class SigmoidLayer:
-    def __init__(self, inputs, outputs, batch_size):
-        ''''
-          inputs:  dimension of the input vector.
-          outputs: dimension of the output vector.
-        '''
-        if (inputs > 0) and (outputs > 0):  
-            self.batch_size = batch_size
-            self.size = outputs
-            rng = np.random.default_rng()
-            self.biases = rng.normal(loc=0.0, scale=1.0,size=(outputs, 1))
-            self.weights = rng.normal(loc=0.0, scale=1.0/np.sqrt(inputs),size=(outputs, inputs))
-
+class SigmoidLayer(Layer):
+    # Sigmoid function
+    def sigmoid(self, z):
+        return 1.0 / (1.0 + np.exp(-z))
+    
     # Forward pass
-    def forward(self, u, y):
-        z = np.dot(self.weights, u) + self.biases  
+    def forward(self, z):
         a = self.sigmoid(z)
-        
-        # For the backward pass)
-        self.u = u
-        self.dsigmoid = a * (1.0 - a) 
- 
+        self.a = a # save for the backword pass
         return a
     
     # Backward pass
-    def backward(self, djda: np.ndarray, eta: float) -> np.ndarray:
-        djdz = djda * self.dsigmoid             
-        djdu = np.dot(self.weights.T , djdz)
-        djdw = np.dot(djdz, self.u.T)
-
-        # Update the weights
-        db = np.sum(djdz, axis=1).reshape(self.biases.shape)
-        self.weights = self.weights - (eta/self.batch_size) * djdw
-        self.biases  = self.biases  - (eta/self.batch_size) * db
+    def backward(self, djda: np.ndarray, y=None, eta=None) -> np.ndarray:
+        dsigmoid = self.a * (1.0 - self.a)             
         
-        return  djdu
-    
-    # Logistic function
-    def sigmoid(self, z):
-        return 1.0 / (1.0 + np.exp(-z))
+        # return to the previous layer
+        return  djda * dsigmoid
