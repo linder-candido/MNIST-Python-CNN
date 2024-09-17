@@ -19,7 +19,7 @@ composed of the following layers:
 
 4. **Fully Connected Layer with Sigmoid Activation**:
    - Applies a fully connected layer followed by a sigmoid activation function to introduce further non-linearity.
-   - It's known that ReLu activation is the default choice (try it out!). 
+   - The ReLu activation is usually the default choice (try it out!). 
 
 5. **Fully Connected Layer**:
    - Another fully connected layer that maps the features to the final classification space.
