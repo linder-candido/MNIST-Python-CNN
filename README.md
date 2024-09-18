@@ -36,6 +36,7 @@ By implementing each component manually, you will gain insights into the followi
 - The role of activation functions in introducing non-linearity.
 - How fully connected layers contribute to classification.
 - How softmax is used for producing class probabilities.
+- How backpropagation is implemented in different types of layers during the backward pass. 
 
 ## Technologies Used
 
